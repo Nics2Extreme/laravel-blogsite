@@ -22,7 +22,7 @@
             @enderror
         </div>
         <div class="mb-5">
-            <input type="text" name="content" class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500" value="{{ old('content', $post->title) }}">
+            <input type="text" name="content" class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500" value="{{ old('content', $post->content) }}">
             @error('content')
             <div class="invalid-feedback">
                 {{ $message }}
