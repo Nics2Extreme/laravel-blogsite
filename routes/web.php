@@ -11,6 +11,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/dashboard/store', [PostController::class, 'store'])->name('dashboard.store');
     Route::get('/dashboard/edit/{post_id}', [PostController::class, 'edit'])->name('dashboard.edit');
     Route::post('/dashboard/update/{post_id}', [PostController::class, 'update'])->name('dashboard.update');
+    Route::post('/dashboard/delete/{post_id}', [PostController::class, 'destroy'])->name('dashboard.destroy');
     Route::view('profile', 'profile')->name('profile');
 });
 

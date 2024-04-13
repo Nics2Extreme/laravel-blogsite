@@ -33,6 +33,13 @@
                 </div>
                 <div class="flex justify-end p-8">
                     <a href="{{ route('dashboard.edit', $post->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 my-4 py-2 px-4 rounded">Edit</a>
+                    <form action="{{ route('dashboard.destroy', $post->id) }}" method="POST">
+                        @method('post')
+                        @csrf
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold mx-2 my-4 py-2 px-4 rounded" onclick="return confirm('Are you sure you want to delete this record?')">
+                            Delete
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

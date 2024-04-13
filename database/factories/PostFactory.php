@@ -19,7 +19,7 @@ class PostFactory extends Factory
         return [
             'title' => fake()->unique()->word(),
             'content' => fake()->text(20),
-            'posted_by' => "User",
+            'posted_by' => 1,
             'post_date' => now(),
         ];
     }

@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $postedby = Auth::user()->name;
+        $postedby = Auth::user()->id;
         $posts = DB::table('posts')->where('posted_by', $postedby)->get();
 
         return view('posts.index', [
@@ -35,7 +35,7 @@ class PostController extends Controller
 
         $validatedData = $request->validate($rules);
         $validatedData['post_date'] = Carbon::now()->format('Y-m-d');
-        $validatedData['posted_by'] = Auth::user()->name;
+        $validatedData['posted_by'] = Auth::user()->id;
 
         Post::create($validatedData);
 
@@ -63,12 +63,12 @@ class PostController extends Controller
 
         $post = Post::where('id', $request->post_id)->first();
 
-        if(!$post) {
+        if (!$post) {
             // error, not existing id,
             dd('haha');
         }
 
-        if($post->posted_by != Auth::user()->name) {
+        if ($post->posted_by != Auth::user()->id) {
             // error, not yours.
             dd('haha');
         }
@@ -78,10 +78,16 @@ class PostController extends Controller
             'content' => $request->content,
             'updated_at' => now()
         ];
-        
+
         Post::where('id', $request->post_id)->update($array);
 
         return Redirect::route('dashboard.index')->with('success', 'Changed successfully!');
+    }
 
+    public function destroy(Request $request, Post $post)
+    {
+        Post::where('id', $request->post_id)->delete($post->id);
+
+        return Redirect::route('dashboard.index')->with('success', 'Product has been deleted!');
     }
 }
