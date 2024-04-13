@@ -9,9 +9,9 @@
         </div>
     </x-slot>
     <!-- Create new post form -->
-    <form action="{{ route('dashboard.update') }}" method="POST" enctype="multipart/form-data" class="max-w-sm mx-4 my-4">
+    <form action="{{ route('dashboard.update', $post->id) }}" method="POST" enctype="multipart/form-data" class="max-w-sm mx-4 my-4">
         @csrf
-        @method('put')
+        @method('post')
         <div class="mb-5">
             <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900">Title</label>
             <input type="text" name="title" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500" value="{{ old('title', $post->title) }}">

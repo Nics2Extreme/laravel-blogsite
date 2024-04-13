@@ -46,7 +46,7 @@ class PostController extends Controller
     {
         $post = DB::table('posts')
             ->where('id', $post_id)
-            ->get();
+            ->first();
 
         return view('posts.edit', [
             'post' => $post
@@ -55,5 +55,33 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
+        $rules = [
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'post_id' => 'required'
+        ];
+
+        $post = Post::where('id', $request->post_id)->first();
+
+        if(!$post) {
+            // error, not existing id,
+            dd('haha');
+        }
+
+        if($post->posted_by != Auth::user()->name) {
+            // error, not yours.
+            dd('haha');
+        }
+
+        $array = [
+            'title' => $request->title,
+            'content' => $request->content,
+            'updated_at' => now()
+        ];
+        
+        Post::where('id', $request->post_id)->update($array);
+
+        return Redirect::route('dashboard.index')->with('success', 'Changed successfully!');
+
     }
 }

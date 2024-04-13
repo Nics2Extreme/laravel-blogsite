@@ -21,10 +21,6 @@ class Post extends Model
     ];
 
     protected $with = [
-        'title',
-        'content',
-        'posted_by',
-        'post_date',
     ];
 
     public function scopeFilter($query, array $filters)
